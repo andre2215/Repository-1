@@ -1,0 +1,56 @@
+terminate = ''
+while terminate != 'Done':
+    Amenities_dict = {'Shampoo': 1, 'Soap': 1., 'Face wash': 1, 'Toothpaste': 1,
+                      'Wet wipes': 2, 'Toilet paper': 4, 'Tissues & Paper Towel': 2, 'Portable Tissues': 2,
+                      'Towel': 2, 'Towelettes': 3, 'Detergent': 2, 'Dryer': 2, 'Hair product': 1,
+                      'Cotton swab': 1, 'Cologne': 1, 'Contacts': 2,
+                      }
+
+    Amenities_curr = {'Shampoo': 1, 'Soap': 1, 'Face wash': 1, 'Toothpaste': 1,
+                      'Wet wipes': 2, 'Toilet paper': 4, 'Tissues & Paper Towel': 2, 'Portable Tissues': 2,
+                      'Towel': 2, 'Towelettes': 3, 'Detergent': 2, 'Dryer': 2, 'Hair product': 1,
+                      'Cotton swab': 1, 'Cologne': 1, 'Contacts': 2,
+                      }
+    Amenities_items = list(Amenities_dict)
+    buy_list = []
+
+# Thought about doing Amenities_dict = Amenities_curr to save lines but I think that would create errors in the future
+# Tracking -------------------------------------------------------------------------------------------------------------
+# Inputs----------------------------------------------------------------------------------------------------------------
+
+    change = input('Lost, Gain, or Done ?')
+    terminate = change
+    print(Amenities_items)
+    second_question = input('Enter item and value separated by a comma. Make sure to input given items and whole # or' 
+                            'error''(ex Shampoo, 1)')
+
+    item, raw_amount = second_question.split(',')
+    val = Amenities_dict[item]
+# Functions-------------------------------------------------------------------------------------------------------------
+
+
+    def main_function(x, y, z):
+        if x == 'Lost':
+            a = int(z) - int(y)
+            return a
+        elif x == 'Gain':
+            b = int(z) + int(y)
+            return b
+        else:
+            print('Error')
+
+
+    amount = main_function(change, raw_amount, val)
+    Amenities_curr.update({item: amount})
+    print('Overall:', Amenities_curr)
+
+    go_buy = {k for (k, v) in Amenities_curr.items() if v <= 0}
+    buy_list.append(go_buy)
+    print('Grocery list:', buy_list)
+
+# Trouble manipulating dictionaries, adding, subtracting, loops
+# dictionaries always restart, making one too record and one to manipulate inefficient.
+# Stack Overflow, DataCamp
+# Problem is it can only take one a time and resets so it doesn't keep up with current supplies
+# This program can subtract or add from a data set and can give items with certain values. However the input is limited
+# and there is no effective storing.
